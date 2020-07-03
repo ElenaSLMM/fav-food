@@ -5,11 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
 
-  {{{body}}}
+<nav class="navbar navbar-expand-lg navbar-ligth bg-ligth">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/"><img src='../images/favFood.png'></a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Inicio</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/restaurants/list">Listado de restaurantes</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/user/log-in">Iniciar sesión</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/user/log-out">Cerrar sesión</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/user/sign-in">Regístrate!</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/user/profile">Perfil</a>
+      </li>
+    </ul>
+
+    {{!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> --}}
+  </div>
+</nav>
+
+<div class="container">
+
+    {{{body}}}
+    
+</div>
 
   <script src="/javascripts/script.js"></script>
 </body>

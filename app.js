@@ -15,8 +15,10 @@ require('./configs/preformatter.config')(app)
 require('./configs/middleware.config')(app)
 require('./configs/views.configs')(app)
 require('./configs/locals.config')(app)
+require('./configs/passport.config')(app)
+
 
 // Base URLS
-app.use('/', require('./routes/index.routes'))
+require('./routes')(app)
 
 module.exports = app

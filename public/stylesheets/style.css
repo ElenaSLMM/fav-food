@@ -1,8 +1,17 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px;
+  font-family: 'Montserrat', sans-serif; }
 
-a {
-  color: #00B7FF; }
+nav {
+  height: 80px;
+  position: fixed;
+  background-color: #f8f8f8; }
+
+nav img {
+  height: 120px;
+  margin-left: 20px; }
+
+h3 {
+  margin-top: 150px; }
 
 /*# sourceMappingURL=style.css.map */
