@@ -36,10 +36,7 @@ router.post("/signup", (req, res, next) => {
         .catch(error => next(error))
 })
 
-
 // User login
-
-
 router.get('/login', (req, res) => res.render('user/login', { "errorMsg": req.flash("error") }))
 router.post('/login', passport.authenticate("local", {
     successRedirect: "/",
@@ -64,9 +61,31 @@ const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : 
 
 
 //profile routes
+router.get('/profile', checkAuthenticated, (req, res) =>{
+    res.render('user/profile', {user: req.user})
+}) 
 
-router.get('/profile', checkAuthenticated, (req, res) => res.render('user/profile'))
-router.get('/profile/edit', checkAuthenticated, (req, res) => res.render('user/profile-edit'))
+
+router.get('/profile/edit/:id', checkAuthenticated, (req, res) => {
+    res.render('user/profile-edit', {user: req.user})
+})
+
+router.post('/profile/edit/:id', checkAuthenticated, (req, res) => {
+
+    const {username, password} = req.body
+    const salt = bcrypt.genSaltSync(bcryptSalt)
+    const hashPass = bcrypt.hashSync(password, salt)
+
+    if (!username || !password) {
+        res.render("user/profile-edit", { errorMsg: "Introduce un usuario y una contraseña válidos" , user: req.user})
+        return
+    }
+    
+    User
+        .findByIdAndUpdate(req.params.id, {username, password: hashPass})
+        .then(() => res.redirect('/user/profile'))
+        .catch(err => console.log('error:' ,err))
+})
 
 
 module.exports = router

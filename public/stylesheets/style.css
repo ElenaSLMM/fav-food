@@ -5,7 +5,8 @@ body {
 nav {
   height: 80px;
   position: fixed;
-  background-color: #f8f8f8; }
+  background-color: #f8f8f8;
+  opacity: 80%; }
 
 nav img {
   height: 120px;

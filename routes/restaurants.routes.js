@@ -19,14 +19,13 @@ const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : 
 router.get('/favs', checkAuthenticated, (req, res) => res.render('restaurants/favs-restaurants'))
 
 
-
 //Wishlist
 
 router.get('/wish', checkAuthenticated, (req, res) => res.render('restaurants/wish-restaurants'))
 
 
 //Visited
-router.get('/visited', checkAuthenticated, (req, res) => res.render('restaurants/visited-restaurants'))
+router.get('/review', checkAuthenticated, (req, res) => res.render('restaurants/review-restaurants'))
 
 
 

@@ -7,9 +7,4 @@ router.get('/', (req, res) => {
 })
 
 
-router.get('/restaurants', (req, res)  => {
-    console.log('entro') 
-    res.send('hola miguel')})
-
-
 module.exports = router

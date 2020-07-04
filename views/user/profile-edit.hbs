@@ -1,1 +1,34 @@
-mi perfil para editar
+<h1>Editar perfil</h1>
+
+<div class="row justify-content-md-center">
+
+
+    <div class="col-4">
+
+
+      <form action='/user/profile/edit/{{user.id}}' method='POST'>
+        <div class="form-group">
+          <label for="username">Nombre de usuario</label>
+          <input type="text" class="form-control" name ='username' id="username" value={{user.username}}>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputPassword1">Contraseña</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name= 'password' placeholder="Password">
+        </div>
+
+        <div class="form-group">
+          <p>{{errorMsg}}</p>
+        </div>
+
+        <button type="submit" class="btn btn-success">Actualizar</button>
+        
+      </form>
+
+    </div>
+
+
+</div>
+
+
+

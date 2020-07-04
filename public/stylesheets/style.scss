@@ -1,14 +1,22 @@
 body {
   font: 14px ;
   font-family: 'Montserrat', sans-serif;
+
+  
 }
+
+// .mainBody{
+//   background: url('../images/backgroundImage.jpg');
+//   background-size: cover;
+//   object-fit: contain;
+// }
 
 
 nav {
   height: 80px; 
-  position: fixed;
+  position: fixed;  
   background-color: #f8f8f8;
-
+  opacity: 80%;
 }
 
 nav img {
@@ -19,4 +27,6 @@ nav img {
 h3{
   margin-top: 150px;
 }
+
+
 
