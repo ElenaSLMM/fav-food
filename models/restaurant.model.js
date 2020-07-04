@@ -2,15 +2,25 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 
-const userSchema = new Schema({
-    username: String,
-    password: String,
-    favorites: [{ type: Schema.Types.ObjectId, ref: 'Restaurant' }],     // ref: 'nombreModelo'
-    rating: Number
+const restaurantSchema = new Schema({
+    name: {type: String, required: true},
+    address: {type: String, required: true},
+    location: {lat: {type: Number}, lng: {type: Number}},
+    priceLevel: {
+        type: Number,
+        min: 1,
+        max: 5
+    },
+    website: String,
+    rating: {
+        type: Number,
+        min: 1,
+        max: 5
+    }
 }, {
     timestamps: true
 })
 
-const User = mongoose.model("Book", userSchema)
+const Restaurant = mongoose.model("Restaurant", restaurantSchema)
 
-module.exports = User
+module.exports = Restaurant

@@ -66,7 +66,7 @@ const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : 
 //profile routes
 
 router.get('/profile', checkAuthenticated, (req, res) => res.render('user/profile'))
-router.get('/profile/edit', (req, res) => res.render('user/profile-edit'))
+router.get('/profile/edit', checkAuthenticated, (req, res) => res.render('user/profile-edit'))
 
 
 module.exports = router
