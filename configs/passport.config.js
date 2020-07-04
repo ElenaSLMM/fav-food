@@ -4,12 +4,14 @@ const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const flash = require("connect-flash")
 
+
+
 const User = require('../models/user.model')
 
 module.exports = app => {
 
     app.use(session({
-        secret: "passport-app-webmad0320",
+        secret: "IronFood", 
         resave: true,
         saveUninitialized: true
     }))
@@ -22,8 +24,8 @@ module.exports = app => {
     })
 
 
-
     app.use(flash())
+
 
     passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
         User.findOne({ username })
