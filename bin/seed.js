@@ -1,28 +1,26 @@
 const axios = require("axios")
 require('dotenv').config()
 
+const mongoose = require('mongoose')
+mongoose.connect(`mongodb://localhost/${process.env.DB}`)
 const Restaurant = require("../models/restaurant.model")
 
-let restaurantsArr = []
 
 storeRestaurants(null)
 
 function storeRestaurants(nextPageToken) {
-
-    let token
     let url = ''
+    let restaurantsArr = []
 
     if (nextPageToken == null){
-        url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.392533,-3.698207&radius=1000&type=restaurant&key=" + process.env.KEY
-        console.log(url)
+        url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.392533,-3.698207&radius=5000&type=restaurant&key=" + process.env.KEY
     } else {
-        url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=" + nextPageToken + '&key=' + process.env.KEY
+        url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=` + nextPageToken + `&key=` + process.env.KEY
     }
-
+    
     axios
         .get(url)
         .then(response => {
-
             response.data.results.forEach(restaurant => {
                 restaurantsArr.push({
                     name: restaurant.name,
@@ -37,18 +35,16 @@ function storeRestaurants(nextPageToken) {
                 })
 
             })
+
+            Restaurant.create(restaurantsArr)
+        
             if(response.data.next_page_token){
-                token = response.data.next_page_token
+                setTimeout(()=> storeRestaurants(response.data.next_page_token), 500)
             }
 
         })
         .catch (error => console.log(error))
-
-    if(token){
-        storeRestaurants(token)
-
-    }
 }
-console.log(restaurantsArr)
+
 
 
