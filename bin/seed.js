@@ -12,7 +12,7 @@ function storeRestaurants(nextPageToken) {
     let restaurantsArr = []
 
     if (nextPageToken == null){
-        url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.392533,-3.698207&radius=1000&type=restaurant&key=" + process.env.KEY
+        url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.392533,-3.698207&radius=1500&type=restaurant&key=" + process.env.KEY
     } else {
         url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=` + nextPageToken + `&key=` + process.env.KEY
     }

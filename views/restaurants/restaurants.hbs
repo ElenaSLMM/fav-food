@@ -3,7 +3,6 @@
 <figure>JELOU, aquí va MY MAP</figure>
 <div class="row">
 {{#each restaurantArr}}
-
 <div class="card col-md-4" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>
@@ -13,11 +12,11 @@
     <a href="#" class="card-link">Llevame allí</a>
     <a href="/restaurants/{{_id}}" class="card-link">Ver detalles</a>
     <br>
-    {{!-- {{#if checkAuthenticated}} --}}
-    <a href="#" class="card-link">Favs</a>
-    <a href="#" class="card-link">Wishlist</a>
-    <a href="#" class="card-link">Reseña</a>
-    {{!-- {{/if}} --}}
+    {{#if ../isAuth}}
+      <a href="#" class="card-link">Favs</a>
+      <a href="#" class="card-link">Wishlist</a>
+      <a href="#" class="card-link">Reseña</a>
+    {{/if}}
   </div>
 </div>
 {{/each}}

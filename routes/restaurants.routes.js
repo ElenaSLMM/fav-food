@@ -8,18 +8,21 @@ const session = require("express-session")
 const axios = require("axios")
 
 const Restaurant = require("../models/restaurant.model")
+const User = require("../models/user.model")
 
 const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/user/login', {errorMsg: 'Área restringida'})
-// const isLogged = (req, res, next ) => req.params.id === req.users.id ? true : false
+const isLogged = (req, res, next ) => req.isAuthenticated() ? true : false
 
 //--------------------------PUBlIC ENDPOINTS-------------------------
 
 //List
 router.get('/list', (req, res)  => {
 
+const isAuth = isLogged(req)
+
     Restaurant
         .find()
-        .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr} ))
+        .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, isAuth: isAuth, user: req.user} ))
         .catch(err => console.log('error: ', err))
 
 })
