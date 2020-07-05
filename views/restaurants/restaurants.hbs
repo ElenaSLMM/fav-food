@@ -1,3 +1,23 @@
-<h2>MAPA</h2>
+<h1>Listado de restaurantes</h1>
 <br>
-cards
+<figure>JELOU, aquí va MY MAP</figure>
+<div class="row">
+{{#each restaurantArr}}
+
+<div class="card col-md-4" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
+    <p class="card-text">Dirección: {{address}}</p>
+    <p class="card-text">Rango de precios: {{priceLevel}}</p>
+    <a href="#" class="card-link">Llevame allí</a>
+    <a href="/restaurants/{{_id}}" class="card-link">Ver detalles</a>
+    <br>
+    <a href="#" class="card-link">Favs</a>
+    <a href="#" class="card-link">Wishlist</a>
+    <a href="#" class="card-link">Reseña</a>
+  </div>
+</div>
+{{/each}}
+
+</div>

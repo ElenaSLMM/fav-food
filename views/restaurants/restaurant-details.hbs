@@ -1,0 +1,40 @@
+<div class="justify-content-center">
+
+    <h2>{{restaurant.name}}</h2>
+
+    <br>
+
+        <ul class="list-group">
+            
+            <li class="list-group-item"><h5>Dirección:</h5> {{data.formatted_address}}</li>
+
+            <li class="list-group-item"><h5>Horarios:</h5>
+                <ul>
+                    {{#each data.opening_hours.weekday_text}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </li>
+
+             <li class="list-group-item"><h5>Teléfono:</h5> {{data.formatted_phone_number}}</li>
+             <li class="list-group-item"><h5>Website:</h5> <a href='{{data.website}}'>{{data.website}}</a></li>
+
+            <li class="list-group-item"><h5>Opiniones de usuarios:</h5>
+                 {{#each data.reviews}}
+                 <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">{{this.author_name}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Puntuación: {{this.rating}}/5</h6>
+                        <p class="card-text">{{this.text}}</p>
+                    </div>
+                </div>
+   
+                {{/each}}
+            
+
+            </li>
+        </ul>
+
+
+
+</div>
