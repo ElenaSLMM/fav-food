@@ -24,7 +24,6 @@ const isAuth = isLogged(req)
         .find()
         .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, isAuth: isAuth, user: req.user} ))
         .catch(err => console.log('error: ', err))
-
 })
 
 

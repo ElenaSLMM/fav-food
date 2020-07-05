@@ -27,14 +27,17 @@
       <li class="nav-item">
         <a class="nav-link" href="/restaurants/list">Listado de restaurantes</a>
       </li>
+      {{!-- {{#unless user}} --}}
+        <li class="nav-item">
+          <a class="nav-link" href="/user/login">Iniciar sesión</a>
+        </li>
+      {{!-- {{/unless}} --}}
 
-      <li class="nav-item">
-        <a class="nav-link" href="/user/login">Iniciar sesión</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="/user/logout">Cerrar sesión</a>
-      </li>
+      {{!-- {{#if user}} --}}
+        <li class="nav-item">
+          <a class="nav-link" href="/user/logout">Cerrar sesión</a>
+        </li>
+      {{!-- {{/if}} --}}
 
       <li class="nav-item">
         <a class="nav-link" href="/user/signup">Regístrate!</a>
@@ -45,10 +48,6 @@
       </li>
     </ul>
 
-    {{!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> --}}
   </div>
 </nav>
 
