@@ -56,43 +56,52 @@ router.get('/wish/delete', checkAuthenticated, (req, res) => {
             res.redirect('/restaurants/wish')
         })
 
-
 })
 
 //Favs
-router.get('/favs', checkAuthenticated, (req, res) =>{
+router.get('/favs', checkAuthenticated, (req, res) => {
 
-    let Arr = req.user.favourites
-    User.findById(req.user._id)
+    User
+        .findById(req.user._id)
         .populate('favourites')
-        .then(Arr => res.render('restaurants/favs-restaurants', {Arr}))
-        .catch(err => console.log('error', err))
-        console.log(Arr)
+        .then(user =>  {
+            let array = user.favourites
+            res.render('restaurants/favs-restaurants', {array})})
+        .catch(err => console.log('error: ', err))
 })
 
 
 
-router.post('/favs/add/:id', (req, res) =>{
-    
+router.post('/favs/add/:id', checkAuthenticated, (req, res, next) => {
+
     Restaurant
-    .findById(req.params.id)
-    .then(restaurant => {
-        User
-            .findOne(req.user._id)
-            .then(user => {
-                if(!user.favourites.some(elem =>elem == restaurant.id)){
-                    user.favourites.push(restaurant)
-                    user.save()
-                }
-            })
-            .catch(err=> console.log('error añadiendo fav', err)) 
-           
-    })
-    .catch(err=> console.log('error añadiendo fav', err)) 
-
+        .findById(req.params.id)
+        .then(restaurant => {
+            User
+                .findOne(req.user._id)
+                .then(user => {
+                    if(!user.favourites.some(elem =>elem == restaurant.id)){
+                        user.favourites.push(restaurant)
+                        user.save()
+                    }
+                    res.redirect('/restaurants/favs')
+                })  
+        })
 })
 
+router.get('/favs/delete', checkAuthenticated, (req, res) => {
 
+    User
+        .findById(req.user._id)
+        .then(user => {
+            let array = user.favourites
+            let newArray = array.filter(restaurant => restaurant != req.query.id)
+            user.favourites = newArray
+            user.save()
+            res.redirect('/restaurants/favs')
+        })
+
+})
 
 //Visited
 router.get('/review', checkAuthenticated, (req, res) => res.render('restaurants/review-restaurants'))
