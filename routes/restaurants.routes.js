@@ -200,12 +200,6 @@ router.get('/:id', (req, res) => {
     })
 
 
-//------------------------PRIVATES ENDPOINTS-------------------
-
-// WISH
-//add restaurant to wishList
-
-
 
 module.exports = router
 
