@@ -16,8 +16,11 @@
           <form action="/restaurants/favs/add/{{_id}}" method="POST">
           <button type="submit">Añadir a favoritos</button>
           </form>
-      <a href="/restaurants/favs/add/{{_id}}" class="card-link">Favs</a>
-      <a href="#" class="card-link">Wishlist</a>
+      
+          <form method = "post" action ="/restaurants/wish/add/{{_id}}">
+          <button type="submit">Wishlist</button>
+          </form>
+          
       <a href="#" class="card-link">Reseña</a>
     {{/if}}
   </div>
