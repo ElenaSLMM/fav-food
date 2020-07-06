@@ -7,6 +7,8 @@ const session = require("express-session")
 
 const axios = require("axios")
 
+const mongoose = require('mongoose')
+
 const Restaurant = require("../models/restaurant.model")
 const User = require("../models/user.model")
 
@@ -33,6 +35,23 @@ const isAuth = req.isAuthenticated()
 
 //Favs
 router.get('/favs', checkAuthenticated, (req, res) => res.render('restaurants/favs-restaurants'))
+
+router.post('/favs/add/:id', (req, res) =>{
+    
+    const userPromise = User.findById(req.user.id)
+    const restaurantPromise = Restaurant.findById(req.params.id)
+    
+    Promise.all([userPromise, restaurantPromise])
+        .then(results =>{
+        let currentUser = results[0]
+        let favRestaurant = results[1]
+        let idRest = mongoose.Types.ObjectId(favRestaurant._id)
+        User.findByIdAndUpdate(req.user.id, currentUser.favourites.push(idRest))
+        console.log(currentUser)
+        })
+        .then(res.render())
+            .catch(err => console.log('Error añadiendo a favoritos', err))
+})
 
 
 //Wishlist
