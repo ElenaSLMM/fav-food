@@ -44,6 +44,25 @@ router.get('/wish', checkAuthenticated, (req, res) => {
         .catch(err => console.log('error: ', err))
 })
 
+router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
+
+    Restaurant
+        .findById(req.params.id)
+        .then(restaurant => {
+            User
+                .findOne(req.user._id)
+                .then(user => {
+                    if(!user.wishList.some(elem =>elem == restaurant.id)){
+                        user.wishList.push(restaurant)
+                        user.save()
+                    }
+                    res.redirect('/restaurants/wish')
+                })  
+        })
+        .catch(err => console.log('error: ', err))
+})
+
+
 router.get('/wish/delete', checkAuthenticated, (req, res) => {
 
     User
@@ -55,6 +74,7 @@ router.get('/wish/delete', checkAuthenticated, (req, res) => {
             user.save()
             res.redirect('/restaurants/wish')
         })
+        .catch(err => console.log('error: ', err))
 
 })
 
@@ -87,6 +107,7 @@ router.post('/favs/add/:id', checkAuthenticated, (req, res, next) => {
                     res.redirect('/restaurants/favs')
                 })  
         })
+        .catch(err => console.log('error: ', err))
 })
 
 router.get('/favs/delete', checkAuthenticated, (req, res) => {
@@ -100,11 +121,64 @@ router.get('/favs/delete', checkAuthenticated, (req, res) => {
             user.save()
             res.redirect('/restaurants/favs')
         })
+        .catch(err => console.log('error', err))
 
 })
 
-//Visited
-router.get('/review', checkAuthenticated, (req, res) => res.render('restaurants/review-restaurants'))
+//Reviews
+
+router.get('/reviews', checkAuthenticated, (req,res) => {
+    User
+        .findById(req.user.id)
+        .populate('opinions.restaurant')
+        .then(user => {
+            let opinionsArr = user.opinions
+            res.render('restaurants/review-restaurants', {opinionsArr})})
+        .catch(err => console.log('error en la vista de reviews', err))
+})
+
+router.get('/reviews/delete', checkAuthenticated, (req, res) => {
+    User
+        .findById(req.user._id)
+        .then(user => {
+            let array = user.opinions
+            let newArray = array.filter(opinion => opinion.id != req.query.id)
+            user.opinions = newArray
+            user.save()
+            res.redirect('/restaurants/reviews')
+        })
+        .catch(err => console.log('error', err))
+})
+
+
+router.get('/reviews/new/:id', checkAuthenticated, (req, res) => {
+    Restaurant
+        .findById(req.params.id)
+        .then((restaurant)=> res.render('restaurants/review-restaurant-form', restaurant))
+        .catch(err => console.log('error: ', err))
+})
+
+
+router.post('/reviews/new/:id', checkAuthenticated, (req, res) =>{
+
+let {date, comments, rating} = req.body
+
+    Restaurant
+        .findById(req.params.id)
+        .then(restaurant =>{
+
+            User
+                .findById(req.user._id)
+                .then(user => {
+                    let review = {restaurant, date, comments, rating}
+                    user.opinions.push(review)
+                    user.save()
+                    res.redirect('/restaurants/reviews')
+            })
+        })
+        .catch(err => console.log('error: ', err))
+} )
+
 
 
 
@@ -131,22 +205,6 @@ router.get('/:id', (req, res) => {
 // WISH
 //add restaurant to wishList
 
-router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
-
-    Restaurant
-        .findById(req.params.id)
-        .then(restaurant => {
-            User
-                .findOne(req.user._id)
-                .then(user => {
-                    if(!user.wishList.some(elem =>elem == restaurant.id)){
-                        user.wishList.push(restaurant)
-                        user.save()
-                    }
-                    res.redirect('/restaurants/wish')
-                })  
-        })
-})
 
 
 module.exports = router
