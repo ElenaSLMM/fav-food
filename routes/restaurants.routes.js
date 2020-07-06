@@ -60,23 +60,36 @@ router.get('/wish/delete', checkAuthenticated, (req, res) => {
 })
 
 //Favs
-router.get('/favs', checkAuthenticated, (req, res) => res.render('restaurants/favs-restaurants'))
+router.get('/favs', checkAuthenticated, (req, res) =>{
+
+    let Arr = req.user.favourites
+    User.findById(req.user._id)
+        .populate('favourites')
+        .then(Arr => res.render('restaurants/favs-restaurants', {Arr}))
+        .catch(err => console.log('error', err))
+        console.log(Arr)
+})
+
+
 
 router.post('/favs/add/:id', (req, res) =>{
     
-    const userPromise = User.findById(req.user.id)
-    const restaurantPromise = Restaurant.findById(req.params.id)
-    
-    Promise.all([userPromise, restaurantPromise])
-        .then(results =>{
-        let currentUser = results[0]
-        let favRestaurant = results[1]
-        let idRest = mongoose.Types.ObjectId(favRestaurant._id)
-        User.findByIdAndUpdate(req.user.id, currentUser.favourites.push(idRest))
-        console.log(currentUser)
-        })
-        .then(res.render())
-            .catch(err => console.log('Error añadiendo a favoritos', err))
+    Restaurant
+    .findById(req.params.id)
+    .then(restaurant => {
+        User
+            .findOne(req.user._id)
+            .then(user => {
+                if(!user.favourites.some(elem =>elem == restaurant.id)){
+                    user.favourites.push(restaurant)
+                    user.save()
+                }
+            })
+            .catch(err=> console.log('error añadiendo fav', err)) 
+           
+    })
+    .catch(err=> console.log('error añadiendo fav', err)) 
+
 })
 
 
