@@ -14,6 +14,7 @@ const User = require("../models/user.model")
 
 const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/user/login', {errorMsg: 'Área restringida'})
 
+
 //--------------------------PUBlIC ENDPOINTS-------------------------
 
 //List
@@ -29,9 +30,34 @@ const isAuth = req.isAuthenticated()
 
 
 
+//------------------------PRIVATES ENDPOINTS---------------
 
-//------------------------ENDPOINTS PRIVATES---------------
+//wish
+router.get('/wish', checkAuthenticated, (req, res) => {
 
+    User
+        .findById(req.user._id)
+        .populate('wishList')
+        .then(user =>  {
+            let array = user.wishList
+            res.render('restaurants/wish-restaurants', {array})})
+        .catch(err => console.log('error: ', err))
+})
+
+router.get('/wish/delete', checkAuthenticated, (req, res) => {
+
+    User
+        .findById(req.user._id)
+        .then(user => {
+            let array = user.wishList
+            let newArray = array.filter(restaurant => restaurant != req.query.id)
+            user.wishList = newArray
+            user.save()
+            res.redirect('/restaurants/wish')
+        })
+
+
+})
 
 //Favs
 router.get('/favs', checkAuthenticated, (req, res) => res.render('restaurants/favs-restaurants'))
@@ -52,25 +78,6 @@ router.post('/favs/add/:id', (req, res) =>{
         .then(res.render())
             .catch(err => console.log('Error añadiendo a favoritos', err))
 })
-
-
-//Wishlist
-
-//vista de wishlist
-router.get('/wish', checkAuthenticated, (req, res) => {
-
-    // User
-    //     .findById(req.user._id)
-    //     .then((user) => user.wishList.forEach(restaurantId => 
-    //         Restaurant
-    //             .find(restaurantId)
-    //             .then()
-    //         ))
-    
-    res.render('restaurants/wish-restaurants')}
-    )
-
-
 
 
 
@@ -97,7 +104,10 @@ router.get('/:id', (req, res) => {
     })
 
 
+//------------------------PRIVATES ENDPOINTS-------------------
 
+// WISH
+//add restaurant to wishList
 
 router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
 
@@ -111,10 +121,10 @@ router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
                         user.wishList.push(restaurant)
                         user.save()
                     }
-                }) 
-               
+                })  
         })
 })
+
 
 module.exports = router
 
