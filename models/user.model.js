@@ -6,8 +6,9 @@ const userSchema = new Schema({
 
     password: {type: String, required: true},
 
-    favorites: [{ type: Schema.Types.ObjectId, ref: 'Restaurant' }],  
-     
+    favouritesArr: {type: [String]}, 
+    //favourites: [{ type: Schema.Types.ObjectId, ref: 'Restaurant' }],  
+    //wishListArr: {type: [String]},
     wishList: [{ type: Schema.Types.ObjectId, ref: 'Restaurant' }],
 
     opinions: [{

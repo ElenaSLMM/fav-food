@@ -37,7 +37,22 @@ router.get('/favs', checkAuthenticated, (req, res) => res.render('restaurants/fa
 
 //Wishlist
 
-router.get('/wish', checkAuthenticated, (req, res) => res.render('restaurants/wish-restaurants'))
+//vista de wishlist
+router.get('/wish', checkAuthenticated, (req, res) => {
+
+    // User
+    //     .findById(req.user._id)
+    //     .then((user) => user.wishList.forEach(restaurantId => 
+    //         Restaurant
+    //             .find(restaurantId)
+    //             .then()
+    //         ))
+    
+    res.render('restaurants/wish-restaurants')}
+    )
+
+
+
 
 
 //Visited
@@ -62,6 +77,25 @@ router.get('/:id', (req, res) => {
         })  
     })
 
+
+
+
+router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
+
+    Restaurant
+        .findById(req.params.id)
+        .then(restaurant => {
+            User
+                .findOne(req.user._id)
+                .then(user => {
+                    if(!user.wishList.some(elem =>elem == restaurant.id)){
+                        user.wishList.push(restaurant)
+                        user.save()
+                    }
+                }) 
+               
+        })
+})
 
 module.exports = router
 
