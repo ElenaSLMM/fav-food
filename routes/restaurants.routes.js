@@ -30,7 +30,7 @@ const isAuth = req.isAuthenticated()
 
 
 
-//------------------------PRIVATES ENDPOINTS---------------
+//------------------------PRIVATES ENDPOINTS--------------------------
 
 //wish
 router.get('/wish', checkAuthenticated, (req, res) => {
@@ -121,6 +121,7 @@ router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
                         user.wishList.push(restaurant)
                         user.save()
                     }
+                    res.redirect('/restaurants/wish')
                 })  
         })
 })
