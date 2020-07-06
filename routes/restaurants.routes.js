@@ -11,14 +11,13 @@ const Restaurant = require("../models/restaurant.model")
 const User = require("../models/user.model")
 
 const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/user/login', {errorMsg: 'Área restringida'})
-const isLogged = (req, res, next ) => req.isAuthenticated() ? true : false
 
 //--------------------------PUBlIC ENDPOINTS-------------------------
 
 //List
 router.get('/list', (req, res)  => {
 
-const isAuth = isLogged(req)
+const isAuth = req.isAuthenticated()
 
     Restaurant
         .find()
