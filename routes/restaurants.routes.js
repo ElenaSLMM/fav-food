@@ -28,7 +28,15 @@ const isAuth = req.isAuthenticated()
         .catch(err => console.log('error: ', err))
 })
 
+// Mongo Access - return Json for Google Maps
 
+router.get('/api', (req, res) => {
+    Restaurant
+        .find()
+        .then(restaurantArr => res.json({restaurantArr}))
+        .catch (err => console.log('error: ', err))
+
+})
 
 //------------------------PRIVATES ENDPOINTS--------------------------
 

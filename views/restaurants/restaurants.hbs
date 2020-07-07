@@ -1,6 +1,10 @@
 <h1>Listado de restaurantes</h1>
 <br>
-<figure>JELOU, aquí va MY MAP</figure>
+
+<figure id='myMap'></figure>
+
+<br>
+
 <div class="row">
 {{#each restaurantArr}}
 <div class="card col-md-4" style="width: 18rem;">
@@ -32,3 +36,9 @@
 {{/each}}
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src='/javascripts/script.js'></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{key}}"></script>
