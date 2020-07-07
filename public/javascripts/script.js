@@ -35,13 +35,14 @@ function setPlaces(arr){
                 lng: restaurant.location.lng
             }
 
+            let image = "../images/mapMarker.png"
             setTimeout(()=>{
                 new google.maps.Marker({
                     position: center,
                     map: myMap,
                     title: restaurant.name,
                     animation: google.maps.Animation.DROP,
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'       //Seleccionar uno del color del logo. Ya tengo la web
+                    icon: image      
                 })
             }, 100 * index)
         })

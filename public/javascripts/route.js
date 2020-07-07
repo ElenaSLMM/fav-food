@@ -23,11 +23,12 @@ function setPlaces (obj) {
             lng: obj.lng
         }
 
+        let image = "../images/mapMarker.png"
         new google.maps.Marker({
             position: center,
             map: myMap,
             title: obj.name,
             animation: google.maps.Animation.DROP,
-
+            icon: image
         })
 }
