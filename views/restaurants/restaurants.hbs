@@ -13,7 +13,8 @@
     <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
     <p class="card-text">Dirección: {{address}}</p>
     <p class="card-text">Rango de precios: {{priceLevel}}</p>
-    <a href="#" class="card-link">Llevame allí</a>
+    <a href="/restaurants/route/{{_id}}" class="card-link">Llevame allí</a>
+    <a href="/restaurants/apiDir/{{_id}}" class="card-link">API</a>
     <a href="/restaurants/{{_id}}" class="card-link">Ver detalles</a>
     <br>
     {{#if ../isAuth}}

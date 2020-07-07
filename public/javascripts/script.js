@@ -29,17 +29,20 @@ function getPlaces(){
 }
 
 function setPlaces(arr){
-    arr.forEach(restaurant => {
-        const center = {
-            lat: restaurant.location.lat,
-            lng: restaurant.location.lng
-        }
+    arr.forEach((restaurant, index) => {
+            const center = {
+                lat: restaurant.location.lat,
+                lng: restaurant.location.lng
+            }
 
-        new google.maps.Marker({
-            position: center,
-            map: myMap,
-            title: restaurant.name
+            setTimeout(()=>{
+                new google.maps.Marker({
+                    position: center,
+                    map: myMap,
+                    title: restaurant.name,
+                    animation: google.maps.Animation.DROP,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'       //Seleccionar uno del color del logo. Ya tengo la web
+                })
+            }, 100 * index)
         })
-
-    })
 }
