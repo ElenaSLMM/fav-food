@@ -5,11 +5,11 @@ body {
   
 }
 
-// .mainBody{
-//   background: url('../images/backgroundImage.jpg');
-//   background-size: cover;
-//   object-fit: contain;
-// }
+.mainBody{
+  background: url('../images/backgroundImage.jpg');
+  background-size: cover;
+  object-fit: contain;
+}
 
 
 nav {
@@ -39,4 +39,38 @@ h3{
 }
 
 
+.star{
+  height: 30px;
+  align-self: center
+}
+
+.add{
+  height: 25px;
+}
+
+.fav{
+  height: 25px;
+}
+
+body button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  outline: inherit;
+}
+
+h1 {
+  color: white;
+  font-weight: bold;
+}
+
+.card{
+  opacity: 70%
+}
+
+.jumbotron {
+  opacity: 80%;
+  margin-top: 100px;
+}
 

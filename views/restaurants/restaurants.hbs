@@ -18,14 +18,14 @@
     <br>
     {{#if ../user}}
           <form action="/restaurants/favs/add/{{_id}}" method="POST">
-          <button type="submit">Añadir a favoritos</button>
+          <button type="submit"><img class='fav' src='../images/fav.png'> Agregar a favoritos</button>
           </form>
       
           <form method = "post" action ="/restaurants/wish/add/{{_id}}">
-          <button type="submit">Wishlist</button>
+          <button type="submit"><img class='star' src='../images/star.png'>Wishlist</button>
           </form>
 
-          <a href='/restaurants/reviews/new/{{_id}}' ><button>Nueva reseña</button></a>
+          <a href='/restaurants/reviews/new/{{_id}}' ><img class='add' src='../images/add.png'> Nueva reseña</a>
 
           <p>{{errorMsg}}</p>
           
