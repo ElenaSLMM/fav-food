@@ -1,7 +1,15 @@
 <figure id='myRoute'></figure>
+<div class="card col-md-4" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
+    <p class="card-text">Dirección: {{address}}</p>
+    <p class="card-text">Rango de precios: {{priceLevel}}</p>
 
+    </div>
+</div>
 <script>
-    const restaurantLocation = {{restaurantLocation}};
+    const locationRest = {{location}};
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

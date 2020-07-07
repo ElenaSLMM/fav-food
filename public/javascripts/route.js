@@ -14,22 +14,13 @@ window.onload = () => {
 
     myMap = new google.maps.Map(document.getElementById('myRoute'), mapOptions)
 
-    getPlaces()
-
+    setPlaces(locationRest)
 }  
 
-function getPlaces() {
-    axios
-        .get('/restaurants/apiDir/:id')
-        .then(json => setPlaces(json.data.restaurant))
-        .catch(err => console.log('error', err))
-}
-
 function setPlaces (obj) {
-
         const center = {
-            lat: obj.location.lat,
-            lng: obj.location.lng
+            lat: obj.lat,
+            lng: obj.lng
         }
 
         new google.maps.Marker({

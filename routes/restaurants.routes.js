@@ -201,6 +201,12 @@ let {date, comments, rating} = req.body
 //         })
     
 // })
+router.get('/route/:id', (req, res) => {
+    Restaurant
+        .findById(req.params.id)
+        .then((restaurant) => res.render('restaurants/route', restaurant))
+        .catch(err => console.log('error: ', err))
+})
 
 //--------------------------PUBlIC ENDPOINTS-------------------------
 //Details
