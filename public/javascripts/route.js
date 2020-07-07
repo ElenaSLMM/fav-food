@@ -1,4 +1,4 @@
-let myMap
+let myRoute
 
 window.onload = () => {
 
@@ -11,23 +11,23 @@ window.onload = () => {
                 center: ironhackMad,
                 zoom: 15,
             }
+    
 
-    myMap = new google.maps.Map(document.getElementById('myRoute'), mapOptions)
+    myRoute = new google.maps.Map(document.getElementById('myRoute'), mapOptions)
 
-    setPlaces(locationRest)
-}  
+    const directionReq = { 
+        origin: ironhackMad,
+        destination: locationRest,
+        travelMode: 'WALKING'
+    }
+    const directionService = new google.maps.DirectionsService
 
-function setPlaces (obj) {
-        const center = {
-            lat: obj.lat,
-            lng: obj.lng
+    directionService.route(
+        directionReq, (response) => {
+            const directionsDisplay = new google.maps.DirectionsRenderer
+            directionsDisplay.setDirections(response)
+            directionsDisplay.setMap(myRoute)
         }
+    )
 
-        new google.maps.Marker({
-            position: center,
-            map: myMap,
-            title: obj.name,
-            animation: google.maps.Animation.DROP,
-
-        })
-}
+}  
