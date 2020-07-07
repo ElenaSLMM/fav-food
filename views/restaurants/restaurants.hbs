@@ -16,7 +16,7 @@
     <a href="/restaurants/route/{{_id}}" class="card-link">Llevame allí</a>
     <a href="/restaurants/{{_id}}" class="card-link">Ver detalles</a>
     <br>
-    {{#if ../isAuth}}
+    {{#if ../user}}
           <form action="/restaurants/favs/add/{{_id}}" method="POST">
           <button type="submit">Añadir a favoritos</button>
           </form>

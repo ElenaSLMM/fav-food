@@ -20,11 +20,9 @@ const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : 
 //List
 router.get('/list', (req, res)  => {
 
-    const isAuth = req.isAuthenticated()
-
     Restaurant
         .find()
-        .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, user: req.user, isAuth: isAuth} ))
+        .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, user: req.user} ))
         .catch(err => console.log('error: ', err))
 })
 
