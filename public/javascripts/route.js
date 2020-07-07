@@ -12,7 +12,6 @@ window.onload = () => {
                 zoom: 15,
             }
     
-
     myRoute = new google.maps.Map(document.getElementById('myRoute'), mapOptions)
 
     const directionReq = { 

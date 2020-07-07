@@ -1,16 +1,16 @@
 <figure id='myRoute'></figure>
 <div class="card col-md-4" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">{{name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
-    <p class="card-text">Dirección: {{address}}</p>
-    <p class="card-text">Rango de precios: {{priceLevel}}</p>
+    <h5 class="card-title">{{restaurant.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Rating: {{restaurant.rating}}</h6>
+    <p class="card-text">Dirección: {{restaurant.address}}</p>
+    <p class="card-text">Rango de precios: {{restaurant.priceLevel}}</p>
 
     </div>
 </div>
 <a href='/restaurants/list'><button>Volver</button></a>
 <script>
-    const locationRest = {{location}};
+    const locationRest = {{restaurant.location}};
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
