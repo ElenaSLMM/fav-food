@@ -189,18 +189,6 @@ let {date, comments, rating} = req.body
         .catch(err => console.log('error: ', err))
 } )
 
-// router.get('/route/:id', (req,res) => {
-//     let ironhackMad = {lat: 40.392450, lng: -3.698187 }
-//     Restaurant
-//         .findById(req.params.id)
-//         .then(restaurant => {
-//             const url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + ironhackMad.lat + ','+ ironhackMad.lng + '&destination=' + restaurant.location.lat + ',' + restaurant.location.lng + "&key=" + process.env.KEY
-//             axios
-//                 .get(url)
-//                 .then((response) => res.render('restaurants/route', ))
-//         })
-    
-// })
 router.get('/route/:id', (req, res) => {
     Restaurant
         .findById(req.params.id)
@@ -223,18 +211,7 @@ router.get('/:id', (req, res) => {
         })  
     })
 
-router.get('/apiDir/:id', (req, res) => {
-    let ironhackMad = {lat: 40.392450, lng: -3.698187 }
-    Restaurant
-        .findById(req.params.id)
-        .then(restaurant => {
-            const url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + ironhackMad.lat + ','+ ironhackMad.lng + '&destination=' + restaurant.location.lat + ',' + restaurant.location.lng + "&key=" + process.env.KEY
-            axios
-                .get(url)
-                .then((response) => {console.log(response) 
-                    res.json(response)})
-        })
-})
+
     
 
 module.exports = router
