@@ -1,3 +1,6 @@
+$ihColor : #34C2FB;
+$navHeight : 80px;
+
 body {
   font: 14px ;
   font-family: 'Montserrat', sans-serif;
@@ -13,15 +16,15 @@ body {
 
 
 nav {
-  height: 80px; 
+  height: $navHeight; 
   position: fixed;  
-  background-color: #f8f8f8;
+  background-color: white;
   opacity: 80%;
 }
 
 nav img {
-  height: 120px;
-  margin-left: 20px;
+  height: 1.3*$navHeight;
+
 }
 
 h3{
@@ -60,17 +63,66 @@ body button {
   outline: inherit;
 }
 
-h1 {
-  color: white;
+body h1 {
+  color: #405B80;
   font-weight: bold;
+  font-size: 3.5rem;
+  margin-top: 20px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7)
+
 }
 
 .card{
-  opacity: 70%
+  opacity: 80%;
+  text-align: center;
 }
 
 .jumbotron {
   opacity: 80%;
   margin-top: 100px;
 }
+
+.opacityCustom{
+  opacity: 1;
+}
+
+.profile{
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-top: 50px;
+  padding: 10%;
+  color: black;
+  font-size: 1.3rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.customCard{
+  color: black;
+  font-weight: bold;
+}
+
+a{
+  text-decoration: none;
+}
+
+.rating{
+  color: black;
+}
+
+.card li h5{
+  font-weight: bold;
+  color: black;
+}
+
+.card li {
+  color: black;
+  font-size: 1.1rem;
+}
+
+.card ul{
+  list-style: none;
+}
+
+
 

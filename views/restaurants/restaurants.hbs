@@ -1,4 +1,4 @@
-<h1>Listado de restaurantes</h1>
+<h1 class='h1Custom'>Listado de restaurantes</h1>
 <br>
 
 <figure id='myMap'></figure>
@@ -9,13 +9,13 @@
 {{#each restaurantArr}}
 <div class="card col-md-4" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">{{name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
+    <h5 class="card-title customCard">{{name}}</h5>
+    <h6 class="card-subtitle mb-2">Rating: {{rating}}</h6>
     <p class="card-text">Dirección: {{address}}</p>
     <p class="card-text">Rango de precios: {{priceLevel}}</p>
     <a href="/restaurants/route/{{_id}}" class="card-link">Llevame allí</a>
     <a href="/restaurants/{{_id}}" class="card-link">Ver detalles</a>
-    <br>
+    <br><br>
     {{#if ../user}}
           <form action="/restaurants/favs/add/{{_id}}" method="POST">
           <button type="submit"><img class='fav' src='../images/fav.png'> Agregar a favoritos</button>
@@ -25,7 +25,7 @@
           <button type="submit"><img class='star' src='../images/star.png'>Wishlist</button>
           </form>
 
-          <a href='/restaurants/reviews/new/{{_id}}' ><img class='add' src='../images/add.png'> Nueva reseña</a>
+          <button><a href='/restaurants/reviews/new/{{_id}}' ><img class='add' src='../images/add.png'> Nueva reseña</a></button>
 
           <p>{{errorMsg}}</p>
           

@@ -1,10 +1,10 @@
 <div class="justify-content-center">
 
-    <h2>{{restaurant.name}}</h2>
+    <h1>{{restaurant.name}}</h1>
 
     <br>
 
-        <ul class="list-group">
+        <ul class="list-group card">
             
             <li class="list-group-item"><h5>Dirección:</h5> {{data.formatted_address}}</li>
 
@@ -24,7 +24,7 @@
                  <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">{{this.author_name}}</h6>
-                        <h6 class="card-subtitle mb-2 text-muted">Puntuación: {{this.rating}}/5</h6>
+                        <h6 class="card-subtitle mb-2 rating">Puntuación: {{this.rating}}/5</h6>
                         <p class="card-text">{{this.text}}</p>
                     </div>
                 </div>
