@@ -1,4 +1,5 @@
-<h2>Opinión del restaurante: {{restaurant.name}}</h2>
+<h1>Opinión del restaurante: {{restaurant.name}}</h1>
+<div class='review-form'>
 <form action="/restaurants/reviews/new/{{restaurant._id}}" method="POST">
   <div class="form-group">
     <label for="date"></label>
@@ -18,5 +19,7 @@
       <option>5</option>
     </select>
   </div>
-  <button type='submit'>Enviar</button>
+  <button class='btn btn-primary' type='submit'>Enviar</button>
 </form>
+
+</div>
