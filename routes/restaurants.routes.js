@@ -18,21 +18,20 @@ const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : 
 //--------------------------PUBlIC ENDPOINTS-------------------------
 
 //List
-router.get('/list', (req, res)  => {
+router.get('/list', (req, res, next)  => {
     Restaurant
         .find()
         .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, user: req.user} ))
-        .catch(err => console.log('error: ', err))
-})
+        .catch(err => next(new Error(err)))
+    })
 
 // Mongo Access - return Json for Google Maps
 
-router.get('/api', (req, res) => {
+router.get('/api', (req, res, next) => {
     Restaurant
         .find()
         .then(restaurantArr => res.json({restaurantArr}))
-        .catch (err => console.log('error: ', err))
-
+        .catch(err => next(new Error(err)))
 })
 
 
@@ -40,7 +39,7 @@ router.get('/api', (req, res) => {
 //------------------------PRIVATES ENDPOINTS--------------------------
 
 //wish
-router.get('/wish', checkAuthenticated, (req, res) => {
+router.get('/wish', checkAuthenticated, (req, res, next) => {
 
     User
         .findById(req.user._id)
@@ -48,7 +47,7 @@ router.get('/wish', checkAuthenticated, (req, res) => {
         .then(user =>  {
             let array = user.wishList
             res.render('restaurants/wish-restaurants', {array: array, user: req.user})})
-        .catch(err => console.log('error: ', err))
+            .catch(err => next(new Error(err)))
 })
 
 router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
@@ -66,11 +65,11 @@ router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
                     res.redirect('/restaurants/wish')
                 })  
         })
-        .catch(err => console.log('error: ', err))
+        .catch(err => next(new Error(err)))
 })
 
 
-router.get('/wish/delete', checkAuthenticated, (req, res) => {
+router.get('/wish/delete', checkAuthenticated, (req, res, next) => {
 
     User
         .findById(req.user._id)
@@ -81,19 +80,18 @@ router.get('/wish/delete', checkAuthenticated, (req, res) => {
             user.save()
             res.redirect('/restaurants/wish')
         })
-        .catch(err => console.log('error: ', err))
-
+        .catch(err => next(new Error(err)))
 })
 
 //Favs
-router.get('/favs', checkAuthenticated, (req, res) => {
+router.get('/favs', checkAuthenticated, (req, res, next) => {
     User
         .findById(req.user._id)
         .populate('favourites')
         .then(user =>  {
             let array = user.favourites
             res.render('restaurants/favs-restaurants', {array: array,  user: req.user})
-        .catch(err => console.log('error: ', err))
+        .catch(err => next(new Error(err)))
     })
 })
 
@@ -114,10 +112,10 @@ router.post('/favs/add/:id', checkAuthenticated, (req, res, next) => {
                     res.redirect('/restaurants/favs')
                 })  
         })
-        .catch(err => console.log('error: ', err))
+        .catch(err => next(new Error(err)))
 })
 
-router.get('/favs/delete', checkAuthenticated, (req, res) => {
+router.get('/favs/delete', checkAuthenticated, (req, res, next) => {
 
     User
         .findById(req.user._id)
@@ -128,23 +126,22 @@ router.get('/favs/delete', checkAuthenticated, (req, res) => {
             user.save()
             res.redirect('/restaurants/favs')
         })
-        .catch(err => console.log('error', err))
-
+        .catch(err => next(new Error(err)))
 })
 
 //Reviews
 
-router.get('/reviews', checkAuthenticated, (req,res) => {
+router.get('/reviews', checkAuthenticated, (req,res, next) => {
     User
         .findById(req.user.id)
         .populate('opinions.restaurant')
         .then(user => {
             let opinionsArr = user.opinions
             res.render('restaurants/review-restaurants', {opinionsArr, opinionsArr, user: req.user})})
-        .catch(err => console.log('error en la vista de reviews', err))
+            .catch(err => next(new Error(err)))
 })
 
-router.get('/reviews/delete', checkAuthenticated, (req, res) => {
+router.get('/reviews/delete', checkAuthenticated, (req, res, next) => {
     User
         .findById(req.user._id)
         .then(user => {
@@ -154,19 +151,19 @@ router.get('/reviews/delete', checkAuthenticated, (req, res) => {
             user.save()
             res.redirect('/restaurants/reviews')
         })
-        .catch(err => console.log('error', err))
+        .catch(err => next(new Error(err)))
 })
 
 
-router.get('/reviews/new/:id', checkAuthenticated, (req, res) => {
+router.get('/reviews/new/:id', checkAuthenticated, (req, res, next) => {
     Restaurant
         .findById(req.params.id)
         .then((restaurant)=> res.render('restaurants/review-restaurant-form', {restaurant: restaurant, user: req.user}))
-        .catch(err => console.log('error: ', err))
+        .catch(err => next(new Error(err)))
 })
 
 
-router.post('/reviews/new/:id', checkAuthenticated, (req, res) =>{
+router.post('/reviews/new/:id', checkAuthenticated, (req, res, next) =>{
 
 let {date, comments, rating} = req.body
 
@@ -186,19 +183,19 @@ let {date, comments, rating} = req.body
                     res.redirect('/restaurants/reviews')
             })
         })
-        .catch(err => console.log('error: ', err))
-} )
+        .catch(err => next(new Error(err)))
+})
 
-router.get('/route/:id', (req, res) => {
+router.get('/route/:id', (req, res, next) => {
     Restaurant
         .findById(req.params.id)
         .then((restaurant) => res.render('restaurants/route', {restaurant: restaurant, user: req.user}))
-        .catch(err => console.log('error: ', err))
+        .catch(err => next(new Error(err)))
 })
 
 //--------------------------PUBlIC ENDPOINTS-------------------------
 //Details
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
     Restaurant
         .findById(req.params.id)
         .then(restaurant => {
@@ -206,8 +203,7 @@ router.get('/:id', (req, res) => {
             axios
                 .get(url)
                 .then(response =>{res.render('restaurants/restaurant-details',{data: response.data.result, restaurant: restaurant, user: req.user})})
-                .catch(err => console.log('error: ', err))
-
+                .catch(err => next(new Error(err)))
         })  
     })
 

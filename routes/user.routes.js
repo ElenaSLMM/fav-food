@@ -33,7 +33,7 @@ router.post("/signup", (req, res, next) => {
                 .then(() => res.redirect("/"))
                 .catch(() => res.render("user/signup", { errorMsg: "No se pudo crear el usuario" }))
         })
-        .catch(error => next(error))
+        .catch(err => next(new Error(err)))
 })
 
 // User login
@@ -70,7 +70,7 @@ router.get('/profile/edit/:id', checkAuthenticated, (req, res) => {
     res.render('user/profile-edit', {user: req.user})
 })
 
-router.post('/profile/edit/:id', checkAuthenticated, (req, res) => {
+router.post('/profile/edit/:id', checkAuthenticated, (req, res, next) => {
 
     const {username, password} = req.body
     const salt = bcrypt.genSaltSync(bcryptSalt)
@@ -84,7 +84,7 @@ router.post('/profile/edit/:id', checkAuthenticated, (req, res) => {
     User
         .findByIdAndUpdate(req.params.id, {username, password: hashPass})
         .then(() => res.redirect('/user/profile'))
-        .catch(err => console.log('error:' ,err))
+        .catch(err => next(new Error(err)))
 })
 
 

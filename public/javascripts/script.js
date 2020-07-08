@@ -10,7 +10,7 @@ window.onload = () => {
     let mapOptions = {
                 center: ironhackMad,
                 zoom: 15,
-                // styles: mapStyles.aubergine
+                styles: mapStyles.graySimple
             }
 
 
