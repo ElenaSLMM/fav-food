@@ -2,7 +2,7 @@ const axios = require("axios")
 require('dotenv').config()
 
 const mongoose = require('mongoose')
-mongoose.connect(`mongodb://localhost/${process.env.DB}`)
+mongoose.connect(process.env.DB_REMOTE)
 const Restaurant = require("../models/restaurant.model")
 
 storeRestaurants(null)
