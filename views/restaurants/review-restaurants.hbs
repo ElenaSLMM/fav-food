@@ -6,7 +6,7 @@
   <div class="card-body">
     <h5 class="card-title">{{restaurant.name}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
-    <h6 class="card-subtitle mb-2 text-muted">Fecha: {{date}}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">Fecha: {{date format='YYYY-MM-DD'}}</h6>
     <p class="card-text">Comentarios: {{comments}}</p>
     <a href="/restaurants/{{restaurant._id}}" class="card-link">Ver detalles</a>
     <a href="/restaurants/list" class="card-link">Volver a lista de restaurantes</a>

@@ -19,7 +19,6 @@ const checkAuthenticated = (req, res, next) => req.isAuthenticated() ? next() : 
 
 //List
 router.get('/list', (req, res)  => {
-
     Restaurant
         .find()
         .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, user: req.user} ))
@@ -178,7 +177,10 @@ let {date, comments, rating} = req.body
             User
                 .findById(req.user._id)
                 .then(user => {
-                    let review = {restaurant, date, comments, rating}
+                    let review = {restaurant: restaurant._id, comments, rating}
+                    if(date) {
+                        review = {...review, date}
+                    }
                     user.opinions.push(review)
                     user.save()
                     res.redirect('/restaurants/reviews')

@@ -1,5 +1,5 @@
-<h2>Opinión del restaurante: {{name}}</h2>
-<form action="/restaurants/reviews/new/{{_id}}" method="POST">
+<h2>Opinión del restaurante: {{restaurant.name}}</h2>
+<form action="/restaurants/reviews/new/{{restaurant._id}}" method="POST">
   <div class="form-group">
     <label for="date"></label>
     <input name='date' type="date" class="form-control" id="date" placeholder="date">
