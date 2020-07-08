@@ -23,7 +23,6 @@ handlebars.registerHelper('key', () => process.env.KEY)
 
 handlebars.registerPartials(__dirname +  "/views/partials")
 
-console.log(handlebars.partials)
 // Base URLS
 require('./routes')(app)
 

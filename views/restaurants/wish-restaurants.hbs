@@ -4,14 +4,7 @@
 {{#each array}}
 <div class="card col-md-4" style="width: 18rem;">
   <div class="card-body">
-    {{!-- <h5 class="card-title">{{name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
-    <p class="card-text">Dirección: {{address}}</p>
-    <p class="card-text">Rango de precios: {{priceLevel}}</p>
-    <a href="/restaurants/route/{{_id}}" class="card-link">Llevame allí</a>
-    <a href="/restaurants/{{_id}}" class="card-link">Ver detalles</a>
-    <a href="/restaurants/list" class="card-link">Volver a lista de restaurantes</a> --}}
-    {{>wishFav this}}
+    {{>wishFav}}
     <a href="/restaurants/wish/delete?id={{_id}}" class="card-link">Eliminar</a>
     <br>
   </div>
