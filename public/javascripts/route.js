@@ -10,7 +10,7 @@ window.onload = () => {
     let mapOptions = {
                 center: ironhackMad,
                 zoom: 15,
-                styles: mapStyles.architectural
+                styles: mapStyles.graySimple
             }
     
     myRoute = new google.maps.Map(document.getElementById('myRoute'), mapOptions)

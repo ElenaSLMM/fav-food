@@ -52,20 +52,19 @@ router.get('/wish', checkAuthenticated, (req, res, next) => {
 
 router.post('/wish/add/:id', checkAuthenticated, (req, res, next) => {
 
-    Restaurant
-        .findById(req.params.id)
-        .then(restaurant => {
-            User
-                .findOne(req.user._id)
-                .then(user => {
-                    if(!user.wishList.some(elem =>elem == restaurant.id)){
-                        user.wishList.push(restaurant)
-                        user.save()
-                    }
-                    res.redirect('/restaurants/wish')
-                })  
+    const userPromise = User.findOne(req.user._id)
+    const restaurantPromise = Restaurant.findById(req.params.id)
+
+    Promise
+        .all([userPromise, restaurantPromise])
+        .then((result)=> {
+            if(!result[0].wishList.some(elem =>elem == result[1].id)){
+                result[0].wishList.push(result[1])
+                result[0].save()
+            }
+            res.redirect('/restaurants/wish')
         })
-        .catch(err => next(new Error(err)))
+        .catch(err => next(new Error(err)))        
 })
 
 
@@ -99,21 +98,21 @@ router.get('/favs', checkAuthenticated, (req, res, next) => {
 
 router.post('/favs/add/:id', checkAuthenticated, (req, res, next) => {
 
-    Restaurant
-        .findById(req.params.id)
-        .then(restaurant => {
-            User
-                .findOne(req.user._id)
-                .then(user => {
-                    if(!user.favourites.some(elem =>elem == restaurant.id)){
-                        user.favourites.push(restaurant)
-                        user.save()
-                    }
-                    res.redirect('/restaurants/favs')
-                })  
-        })
+    const userPromise = User.findOne(req.user._id)
+    const restaurantPromise = Restaurant.findById(req.params.id)
+
+    Promise
+        .all([userPromise, restaurantPromise])
+        .then(result =>{
+            if(!result[0].favourites.some(elem =>elem == result[1].id)){
+                result[0].favourites.push(result[1])
+                result[0].save()
+            }
+            res.redirect('/restaurants/favs')
+        })  
         .catch(err => next(new Error(err)))
 })
+
 
 router.get('/favs/delete', checkAuthenticated, (req, res, next) => {
 
@@ -138,7 +137,7 @@ router.get('/reviews', checkAuthenticated, (req,res, next) => {
         .then(user => {
             let opinionsArr = user.opinions
             res.render('restaurants/review-restaurants', {opinionsArr, opinionsArr, user: req.user})})
-            .catch(err => next(new Error(err)))
+        .catch(err => next(new Error(err)))
 })
 
 router.get('/reviews/delete', checkAuthenticated, (req, res, next) => {
@@ -165,26 +164,24 @@ router.get('/reviews/new/:id', checkAuthenticated, (req, res, next) => {
 
 router.post('/reviews/new/:id', checkAuthenticated, (req, res, next) =>{
 
-let {date, comments, rating} = req.body
+    let {date, comments, rating} = req.body
 
-    Restaurant
-        .findById(req.params.id)
-        .then(restaurant =>{
+    const userPromise = User.findById(req.user.id)
+    const restaurantPromise = Restaurant.findById(req.params.id)
 
-            User
-                .findById(req.user._id)
-                .then(user => {
-                    let review = {restaurant: restaurant._id, comments, rating}
-                    if(date) {
-                        review = {...review, date}
-                    }
-                    user.opinions.push(review)
-                    user.save()
-                    res.redirect('/restaurants/reviews')
-            })
+    Promise
+        .all([userPromise, restaurantPromise])
+        .then(result => {
+            let review = {restaurant: result[1]._id, comments, rating}
+            if(date) {review = {...review, date}}
+            result[0].opinions.push(review)
+            result[0].save()
+            res.redirect('/restaurants/reviews')
+
         })
         .catch(err => next(new Error(err)))
 })
+
 
 router.get('/route/:id', (req, res, next) => {
     Restaurant
@@ -200,15 +197,11 @@ router.get('/:id', (req, res, next) => {
         .findById(req.params.id)
         .then(restaurant => {
             const url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + restaurant.googleId + "&key=" + process.env.KEY
-            axios
-                .get(url)
-                .then(response =>{res.render('restaurants/restaurant-details',{data: response.data.result, restaurant: restaurant, user: req.user})})
-                .catch(err => next(new Error(err)))
-        })  
-    })
+            return axios.get(url)})
+        .then(response =>{res.render('restaurants/restaurant-details',{data: response.data.result, restaurant: response.restaurant, user: req.user})})
+        .catch(err => next(new Error(err)))
+})
 
-
-    
 
 module.exports = router
 
