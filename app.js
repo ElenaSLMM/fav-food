@@ -21,6 +21,9 @@ require('./configs/passport.config')(app)
 // Export variables to HBS
 handlebars.registerHelper('key', () => process.env.KEY)
 
+handlebars.registerPartials(__dirname +  "/views/partials")
+
+console.log(handlebars.partials)
 // Base URLS
 require('./routes')(app)
 

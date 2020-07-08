@@ -10,7 +10,7 @@ body {
 
 .mainBody{
   background: url('../images/backgroundImage.jpg');
-  background-size: cover;
+  background-size: 100%;
   object-fit: contain;
 }
 
@@ -22,9 +22,9 @@ nav {
   opacity: 80%;
 }
 
-nav img {
+.navbar-brand {
   height: 1.3*$navHeight;
-
+  position: absolute;
 }
 
 #myMap{
@@ -72,6 +72,7 @@ body h1 {
 .card{
   opacity: 80%;
   text-align: center;
+  padding: 1px;
 }
 
 .jumbotron {

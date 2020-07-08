@@ -4,7 +4,7 @@ body {
 
 .mainBody {
   background: url("../images/backgroundImage.jpg");
-  background-size: cover;
+  background-size: 100%;
   object-fit: contain; }
 
 nav {
@@ -13,8 +13,9 @@ nav {
   background-color: white;
   opacity: 80%; }
 
-nav img {
-  height: 104px; }
+.navbar-brand {
+  height: 104px;
+  position: absolute; }
 
 #myMap {
   width: 100%;
@@ -51,7 +52,8 @@ body h1 {
 
 .card {
   opacity: 80%;
-  text-align: center; }
+  text-align: center;
+  padding: 1px; }
 
 .jumbotron {
   opacity: 80%;
