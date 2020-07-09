@@ -1,9 +1,22 @@
 <h1 class='h1Custom'>Listado de restaurantes</h1>
 <br>
-<form class="form-inline my-2 my-lg-0" method = "POST" action = "/restaurants/search">
-  <input name="name" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-</form>
+	<div class="row justify-content-center">
+    <div class="col-12">
+      <form class="card card-sm" method='POST' action='/restaurants/search'>
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col-auto">
+              <i class="fas fa-search h4 text-body"></i>
+          </div>
+          <div class="col">
+              <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="¿Dónde comemos hoy?">
+          </div>
+          <div class="col-auto">
+              <button class="btn btn-lg btn-info" type="submit">Buscar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 <figure id='myMap'></figure>
 
 <br>
@@ -16,19 +29,21 @@
     <h6 class="card-subtitle">Rating: {{rating}}</h6>
     <p class="card-text">Dirección: {{address}}</p>
     <p class="card-text">Rango de precios: {{priceLevel}}</p>
-    <a href="/restaurants/route/{{_id}}" class="card-link">Llevame allí</a>
-    <a href="/restaurants/{{_id}}" class="card-link">Ver detalles</a>
+    <a href="/restaurants/route/{{_id}}" class="btn btn-info">Llevame allí</a>
+    <a href="/restaurants/{{_id}}" class="btn btn-secondary">Ver detalles</a>
     <br><br>
     {{#if ../user}}
           <form action="/restaurants/favs/add/{{_id}}" method="POST">
-          <button type="submit"><img class='fav' src='../images/fav.png'> Agregar a favoritos</button>
+          <button type="submit" class="btn btn-light"><img class='fav' src='../images/fav.png'> Agregar a favoritos</button>
           </form>
       
           <form method = "post" action ="/restaurants/wish/add/{{_id}}">
-          <button type="submit"><img class='star' src='../images/star.png'>Wishlist</button>
+          <button type="submit" class="btn btn-light"><img class='star' src='../images/star.png'> Wishlist</button>
           </form>
 
-          <button><a href='/restaurants/reviews/new/{{_id}}' ><img class='add' src='../images/add.png'> Nueva reseña</a></button>
+          <form action ='/restaurants/reviews/new/{{_id}}'>
+          <button type="submit" class="btn btn-light"><img class='add' src='../images/add.png'> Nueva reseña</button>
+          </form>
 
           <p>{{errorMsg}}</p>
           

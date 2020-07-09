@@ -9,12 +9,14 @@ body {
 
 nav {
   height: 80px;
-  position: fixed;
-  font-size: 1.2rem; }
+  font-size: 1.4rem; }
 
 .navbar-brand {
   height: 104px;
   position: absolute; }
+
+nav img {
+  height: 100px; }
 
 #myMap {
   width: 100%;
@@ -58,7 +60,12 @@ body h1 {
 .jumbotron {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.6);
-  margin-top: 100px; }
+  margin-top: 100px;
+  font-size: 1.2rem; }
+
+.jumbotron a {
+  color: #405B80;
+  font-weight: bold; }
 
 .profile {
   margin-top: 50px;
@@ -115,5 +122,13 @@ a {
 .bg-white-text-center {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.7); }
+
+.btn {
+  border-radius: 0;
+  margin-top: 3px; }
+
+.btn-info {
+  background-color: #34C2FB;
+  font-weight: 500; }
 
 /*# sourceMappingURL=style.css.map */

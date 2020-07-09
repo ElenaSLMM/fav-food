@@ -11,16 +11,49 @@
 </head>
 <body class='mainBody'>
 
+{{!-- <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/"><img src="/../images/IronFood.png" alt="logo"></a>
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav md-auto">
+        <li class="nav-item">
+           <a class="nav-link" href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+           <a class="nav-link" href="/restaurants/list">Listado de restaurantes</a>
+        </li>
+        {{#unless user}}
+        <li class="nav-item">
+          <a class="nav-link" href="/user/login">Iniciar sesión</a>
+        </li>
+        <li class="nav-item">
+           <a class="nav-link" href="/user/signup">Regístrate!</a>
+        </li>
+        {{/unless}}
+        {{#if user}}
+        <li class="nav-item">
+          <a class="nav-link" href="/user/logout">Cerrar sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/profile">Perfil</a>
+        </li>
+       {{/if}}
 
-<nav class="navbar navbar-expand-md bg-white-text-center">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+      </ul>
+    </div>
+  </nav> --}}
+<nav class="navbar navbar-expand-md navbar-fixed-top bg-white-text-center">
   <a class="navbar-brand" href="/"><img class='navbar-brand' src='/../images/IronFood.png'></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/">Inicio</a>
       </li>
 
@@ -41,10 +74,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/user/logout">Cerrar sesión</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="/user/profile">Perfil</a>
         </li>
-
        {{/if}}
     </ul>
 
