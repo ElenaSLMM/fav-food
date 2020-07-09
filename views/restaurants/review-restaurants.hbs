@@ -8,12 +8,14 @@
     <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
     <h6 class="card-subtitle mb-2 text-muted">Fecha: {{date format='YYYY-MM-DD'}}</h6>
     <p class="card-text">Comentarios: {{comments}}</p>
-    <a href="/restaurants/{{restaurant._id}}" class="card-link">Ver detalles</a>
-    <a href="/restaurants/list" class="card-link">Volver a lista de restaurantes</a>
-    <a href="/restaurants/reviews/delete?id={{_id}}" class="card-link">Eliminar</a>
+    <a href="/restaurants/{{restaurant._id}}" class="btn btn-secondary">Ver detalles</a>
+    <a href="/restaurants/reviews/delete?id={{_id}}" class="btn btn-danger">Eliminar</a>
     <br>
   </div>
 </div>
 {{/each}}
 
+</div>
+<div class="row justify-content-center">
+<a href="/restaurants/list"><button type="submit" class="btn btn-light btn-back">Volver a lista de restaurantes</button></a>
 </div>
