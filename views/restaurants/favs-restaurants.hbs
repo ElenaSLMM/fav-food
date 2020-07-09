@@ -1,8 +1,8 @@
 <h1>Mis favoritos</h1>
 
-<div class="row">
+<div class="row mx-auto">
 {{#each array}}
-<div class="card col-md-4" style="width: 18rem;">
+<div class="card col-12 col-sm-12 col-md-6 col-lg-4">
   <div class="card-body">
     {{>wishFav}}
     <a href="/restaurants/favs/delete?id={{_id}}" class="card-link">Eliminar</a>

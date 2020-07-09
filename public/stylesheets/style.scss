@@ -18,8 +18,7 @@ body {
 nav {
   height: $navHeight; 
   position: fixed;  
-  background-color: white;
-  opacity: 80%;
+  font-size: 1.2rem;
 }
 
 .navbar-brand {
@@ -72,25 +71,21 @@ body h1 {
 .card{
   opacity: 80%;
   text-align: center;
-  padding: 1px;
+  margin: 5px auto;
+  font-size: 1.2rem;
 }
 
 .jumbotron {
-  opacity: 80%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.6);
   margin-top: 100px;
 }
 
-.opacityCustom{
-  opacity: 1;
-}
-
 .profile{
-  background-color: rgba(255, 255, 255, 0.5);
   margin-top: 50px;
   padding: 10%;
   color: black;
-  font-size: 1.3rem;
-  text-align: center;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
@@ -101,6 +96,8 @@ body h1 {
 
 a{
   text-decoration: none;
+  font-size: 1.2rem;
+  color: #405B80;
 }
 
 .rating{
@@ -120,23 +117,22 @@ a{
 .card ul{
   list-style: none;
 }
-
-.test{
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 5%;
-  margin-top: 150px;
-  text-align: center;
+.card-title{
+  color: #405B80;
 }
 
-.test h3{
+.login-form{
+  padding: 5%;
+  margin-top: 150px;
+}
+
+.login-form h3{
   font-weight: bold;
 }
 
 .review-form{
-  background-color: rgba(255, 255, 255, 0.7);
   padding: 5%;
   margin-top: 20px;
-  text-align: center;
   color: black;
   font-weight: bold;
   font-size: 1.2rem;
@@ -147,4 +143,9 @@ a{
   margin-left: 15px;
   font-weight: bold;
 
+}
+
+.bg-white-text-center{
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
