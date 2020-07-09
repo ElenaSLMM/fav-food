@@ -29,7 +29,7 @@ router.get('/list', (req, res, next)  => {
 
 router.get('/api', (req, res, next) => {
     const name = req.query.name
-    const regex = new RegExp('^[a-zA-Z0-9 ]*'+ name + '[a-zA-Z0-9 ]*', 'i')
+    const regex = new RegExp('^[a-zA-Z0-9 \',]*'+ name + '[a-zA-Z0-9 \',]*', 'i')
 
     if(req.query.name) {
         Restaurant
@@ -48,7 +48,7 @@ router.get('/api', (req, res, next) => {
 
 router.post('/search', (req, res, next) => {
     const {name} = req.body
-    const regex = new RegExp('^[a-zA-Z0-9 ]*'+ name + '[a-zA-Z0-9 ]*', 'i')
+    const regex = new RegExp('^[a-zA-Z0-9 \',]*'+ name + '[a-zA-Z0-9 \',]*', 'i')
     Restaurant
         .find({name: {$regex : regex}})
         .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, search: name, user: req.user}))
