@@ -34,6 +34,17 @@ router.get('/api', (req, res, next) => {
         .catch(err => next(new Error(err)))
 })
 
+// SearchBar
+
+router.post('/search', (req, res, next) => {
+    const {name} = req.body
+    const regex = new RegExp('^[a-zA-Z ]*'+ name + '[a-zA-Z ]*', 'i')
+    Restaurant
+        .find({name: {$regex : regex}})
+        .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, user: req.user}))
+        .catch(err => next(new Error(err)))
+})
+
 
 
 //------------------------PRIVATES ENDPOINTS--------------------------
