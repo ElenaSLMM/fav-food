@@ -1,6 +1,7 @@
 let priceLevel = document.querySelectorAll('.priceLevel')
 
 function setPriceLevelImages ()  {
+    
     priceLevel.forEach(priceLevel => {
         if(priceLevel.innerHTML == 'Rango de precios: 1'){
             priceLevel.innerHTML=`Rango de precios: <img src='/images/euro.png'>`
