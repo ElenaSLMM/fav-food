@@ -20,13 +20,17 @@ window.onload = () => {
 
 }   
 
-
 function getPlaces(){
+
+    let url = '/restaurants/api'
+    if(search){
+        url = url + '?name=' + search
+    }
+    console.log(url)
     axios
-        .get('/restaurants/api')
+        .get(url)
         .then(json => setPlaces(json.data.restaurantArr))
         .catch(err => console.log('error', err))
-        
 }
 
 
