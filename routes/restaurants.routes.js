@@ -28,23 +28,32 @@ router.get('/list', (req, res, next)  => {
 // Mongo Access - return Json for Google Maps
 
 router.get('/api', (req, res, next) => {
-    Restaurant
-        .find()
-        .then(restaurantArr => res.json({restaurantArr}))
-        .catch(err => next(new Error(err)))
+    const name = req.query.name
+    const regex = new RegExp('^[a-z ]*'+ name + '[a-z ]*', 'i')
+
+    if(req.query.name) {
+        Restaurant
+            .find({name: {$regex : regex}})
+            .then(restaurantArr => res.json({restaurantArr}))
+            .catch(err => next(new Error(err)))
+    }else{
+        Restaurant
+            .find()
+            .then(restaurantArr => res.json({restaurantArr}))
+            .catch(err => next(new Error(err)))
+    }
 })
 
 // SearchBar
 
 router.post('/search', (req, res, next) => {
     const {name} = req.body
-    const regex = new RegExp('^[a-zA-Z ]*'+ name + '[a-zA-Z ]*', 'i')
+    const regex = new RegExp('^[a-z ]*'+ name + '[a-z ]*', 'i')
     Restaurant
         .find({name: {$regex : regex}})
-        .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, user: req.user}))
+        .then(restaurantArr => res.render('restaurants/restaurants', {restaurantArr: restaurantArr, search: name, user: req.user}))
         .catch(err => next(new Error(err)))
 })
-
 
 
 //------------------------PRIVATES ENDPOINTS--------------------------
