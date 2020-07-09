@@ -39,7 +39,7 @@ function getPlaces(){
 function setPlaces(arr){
 
     arr.forEach((restaurant, index) => {
-        let contentString = `<h6> ${restaurant.name}</h6>` + `<p>Rating: ${restaurant.rating}</p>` + `<p>Dirección: ${restaurant.address}</p>` + `<p>Rango de precios: ${restaurant.priceLevel}</p>` + `<p><a href="/restaurants/route/${restaurant._id}">Ruta hasta aquí</a></p>` + `<a href="/restaurants/${restaurant._id}">Detalles</a>`
+        let contentString = `<h6> ${restaurant.name}</h6>` + `<p>Rating: ${restaurant.rating}</p>` + `<p>Dirección: ${restaurant.address}</p>` + `<p class='priceLevel'>Rango de precios: ${restaurant.priceLevel}</p>` + `<p><a href="/restaurants/route/${restaurant._id}">Ruta hasta aquí</a></p>` + `<a href="/restaurants/${restaurant._id}">Detalles</a>`
         
         let infowindow = new google.maps.InfoWindow({
             content: contentString,
